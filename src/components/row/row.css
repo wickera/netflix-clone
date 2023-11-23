@@ -1,0 +1,49 @@
+.row-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 20%; */
+}
+
+.horizontal {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.item {
+  flex: 0 0 auto;
+  margin-right: 10px;
+  scroll-snap-align: start;
+  box-sizing: border-box;
+}
+
+.scroll-content {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.scroll-button {
+  height: 100%;
+  background-color: rgba(255, 255, 128, 0.5);
+  transform: translateY(-50%);
+  font-size: 24px;
+  cursor: pointer;
+  background-color: rgba(150, 150, 150, 0.5);
+  border: none;
+  outline: none;
+}
+
+.image {
+  width: 100%;
+}
+
+.scroll-left {
+  float: left;
+  left: 10px;
+}
+
+.scroll-right {
+  float: right;
+  right: 10px;
+}
