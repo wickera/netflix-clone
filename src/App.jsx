@@ -1,13 +1,11 @@
-import MovieList from "./components/MovieList";
-import ShowList from "./components/ShowList";
+import Home from "./pages/home/home";
+import Navbar from "./components/navbar/navbar";
 
-function App() {
+export default function App() {
   return (
     <>
-      <ShowList />
-      <MovieList />
+      <Navbar />
+      <Home />
     </>
   );
 }
-
-export default App;

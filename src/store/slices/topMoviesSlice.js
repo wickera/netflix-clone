@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { baseURL, options } from "../api/tmdb";
+import { baseURL, options } from "../../api/tmdb";
 
 export const fetchPopularMovies = createAsyncThunk(
   "movies/fetchPopularMovies",

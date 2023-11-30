@@ -11,7 +11,7 @@ import {
   selectTopRatedMovies,
   fetchTrendingMovies,
   selectTrendingMovies,
-} from "../slices/topMoviesSlice";
+} from "../store/slices/topMoviesSlice";
 
 import Row from "./row/row";
 
@@ -42,7 +42,6 @@ const MovieList = () => {
   return (
     <>
       <Row title="Popular Movies" items={popularMovies} />
-      <Row title="Now Playing Movies" items={nowPlayingMovies} />
     </>
   );
 };

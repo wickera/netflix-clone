@@ -1,23 +1,22 @@
 import React from "react";
-import Slider from "react-slick";
+import "./navbar.css";
 
-const Row = ({ children }, title) => {
-  const settings = {
-    infinite: true,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1200,
-      },
-    ],
-  };
+const Navbar = () => {
   return (
-    <div>
-      <h4>{title}</h4>
-      {children}
+    <div className="navbar">
+      <ul className="links left">
+        <li>Netflix</li>
+        <li>Home</li>
+        <li>TV Shows</li>
+        <li>Movies</li>
+        <li>New & Popular</li>
+        <li>Browse by Languages</li>
+      </ul>
+      <ul className="links right">
+        <li>Search</li>
+      </ul>
     </div>
   );
 };
 
-export default Row;
+export default Navbar;

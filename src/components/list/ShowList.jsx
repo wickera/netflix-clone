@@ -5,7 +5,7 @@ import {
   selectPopularShows,
   fetchTopRatedShows,
   selectTopRatedShows,
-} from "../slices/topShowsSlice";
+} from "../store/slices/topShowsSlice";
 
 import Row from "./row/row";
 
