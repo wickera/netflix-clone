@@ -42,14 +42,37 @@ export const fetchTrendingMovies = createAsyncThunk(
   }
 );
 
-export const topMoviesSlice = createSlice({
-  name: "topMovies",
+export const fetchMoviesByGenre = createAsyncThunk(
+  "movies/fetchMoviesByGenre",
+  async (genreId) => {
+    const response = await axios.get(
+      `${baseURL}/discover/movie?with_genre=${genreId}`,
+      options
+    );
+    console.log("Genre Query Response: ", response.data.results);
+    console.log("Genre ID: ", genreId);
+    return response.data.results;
+  }
+);
+
+export const fetchMovieVideosById = createAsyncThunk(
+  "movies/fetchMovieVideoById",
+  async (id) => {
+    const response = await axios.get(`${baseURL}/movie/${id}/videos`, options);
+    return response.data.results;
+  }
+);
+
+export const moviesSlice = createSlice({
+  name: "movies",
   initialState: {
     popularMovies: [],
     nowPlayingMovies: [],
     upcomingMovies: [],
     topRatedMovies: [],
     trendingMovies: [],
+    moviesByGenre: [],
+    movieVideos: [],
     status: "idle",
     error: null,
   },
@@ -110,15 +133,38 @@ export const topMoviesSlice = createSlice({
       .addCase(fetchTrendingMovies.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(fetchMoviesByGenre.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchMoviesByGenre.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.moviesByGenre = action.payload;
+      })
+      .addCase(fetchMoviesByGenre.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(fetchMovieVideosById.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchMovieVideosById.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.movieVideos = action.payload;
+      })
+      .addCase(fetchMovieVideosById.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
   },
 });
 
-export const selectPopularMovies = (state) => state.topMovies.popularMovies;
-export const selectNowPlayingMovies = (state) =>
-  state.topMovies.nowPlayingMovies;
-export const selectUpcomingMovies = (state) => state.topMovies.upcomingMovies;
-export const selectTopRatedMovies = (state) => state.topMovies.topRatedMovies;
-export const selectTrendingMovies = (state) => state.topMovies.trendingMovies;
+export const selectPopularMovies = (state) => state.movies.popularMovies;
+export const selectNowPlayingMovies = (state) => state.movies.nowPlayingMovies;
+export const selectUpcomingMovies = (state) => state.movies.upcomingMovies;
+export const selectTopRatedMovies = (state) => state.movies.topRatedMovies;
+export const selectTrendingMovies = (state) => state.movies.trendingMovies;
+export const selectMoviesByGenre = (state) => state.movies.moviesByGenre;
+export const selectMovieVideosById = (state) => state.movies.movieVideos;
 
-export default topMoviesSlice.reducer;
+export default moviesSlice.reducer;

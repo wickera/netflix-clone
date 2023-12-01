@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { baseURL, options } from "../../api/tmdb";
 
 export const fetchPopularShows = createAsyncThunk(
-  "tv/fetchPopularShows",
+  "shows/fetchPopularShows",
   async () => {
     const response = await axios.get(`${baseURL}/tv/popular`, options);
     return response.data.results;
@@ -11,18 +11,32 @@ export const fetchPopularShows = createAsyncThunk(
 );
 
 export const fetchTopRatedShows = createAsyncThunk(
-  "tv/fetchTopRatedShows",
+  "shows/fetchTopRatedShows",
   async () => {
     const response = await axios.get(`${baseURL}/tv/top_rated`, options);
     return response.data.results;
   }
 );
 
-export const topShowsSlice = createSlice({
-  name: "topShows",
+export const fetchShowsByGenre = createAsyncThunk(
+  "shows/fetchShowsByGenre",
+  async (genreId) => {
+    const response = await axios.get(
+      `${baseURL}/discover/tv?with_genre=${genreId}`,
+      options
+    );
+    console.log("Genre Query Response: ", response.data.results);
+    console.log("Genre ID: ", genreId);
+    return response.data.results;
+  }
+);
+
+export const showsSlice = createSlice({
+  name: "shows",
   initialState: {
     popularShows: [],
     topRatedShows: [],
+    showsByGenre: [],
     status: "idle",
     error: null,
   },
@@ -50,11 +64,23 @@ export const topShowsSlice = createSlice({
       .addCase(fetchTopRatedShows.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(fetchShowsByGenre.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchShowsByGenre.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.showsByGenre = action.payload;
+      })
+      .addCase(fetchShowsByGenre.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
   },
 });
 
-export const selectPopularShows = (state) => state.topShows.popularShows;
-export const selectTopRatedShows = (state) => state.topShows.topRatedShows;
+export const selectPopularShows = (state) => state.shows.popularShows;
+export const selectTopRatedShows = (state) => state.shows.topRatedShows;
+export const selectShowsByGenre = (state) => state.shows.showsByGenre;
 
-export default topShowsSlice.reducer;
+export default showsSlice.reducer;

@@ -11,9 +11,9 @@ import {
   selectTopRatedMovies,
   fetchTrendingMovies,
   selectTrendingMovies,
-} from "../store/slices/topMoviesSlice";
+} from "../../store/slices/moviesSlice";
 
-import Row from "./row/row";
+import Row from "../row/row";
 
 const MovieList = () => {
   const dispatch = useDispatch();

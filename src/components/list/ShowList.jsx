@@ -5,9 +5,9 @@ import {
   selectPopularShows,
   fetchTopRatedShows,
   selectTopRatedShows,
-} from "../store/slices/topShowsSlice";
+} from "../../store/slices/showsSlice";
 
-import Row from "./row/row";
+import Row from "../row/row";
 
 const ShowList = () => {
   const dispatch = useDispatch();

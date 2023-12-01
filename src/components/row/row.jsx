@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./row.css";
 
-const Row = ({ items }) => {
+const Row = ({ title, items }) => {
   const scrollContainerRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -68,41 +68,44 @@ const Row = ({ items }) => {
   const pagesToScroll = scrollableElements(items, itemsPerPage);
 
   return (
-    <div className="row-container">
-      <button
-        className="scroll-button scroll-left"
-        onClick={() => scrollPrevious()}
-        disabled={currentPage === 1}
-      >
-        <FontAwesomeIcon icon={faChevronLeft} className="chevron-left" />
-      </button>
-      <div className="scroll-container" ref={scrollContainerRef}>
-        {items &&
-          pagesToScroll.map((page, index) => {
-            return (
-              <div key={index} className="page">
-                {page.map((show) => {
-                  return (
-                    <Item
-                      key={show.id}
-                      image={show.backdrop_path}
-                      width={imageWidth}
-                      showName={show.name}
-                      showTitle={show.title}
-                    />
-                  );
-                })}
-              </div>
-            );
-          })}
+    <div className="row">
+      <h4>{title}</h4>
+      <div className="row-container">
+        <button
+          className="scroll-button scroll-left"
+          onClick={() => scrollPrevious()}
+          disabled={currentPage === 1}
+        >
+          <FontAwesomeIcon icon={faChevronLeft} className="chevron-left" />
+        </button>
+        <div className="scroll-container" ref={scrollContainerRef}>
+          {items &&
+            pagesToScroll.map((page, index) => {
+              return (
+                <div key={index} className="page">
+                  {page.map((show) => {
+                    return (
+                      <Item
+                        key={show.id}
+                        image={show.backdrop_path}
+                        width={imageWidth}
+                        showName={show.name}
+                        showTitle={show.title}
+                      />
+                    );
+                  })}
+                </div>
+              );
+            })}
+        </div>
+        <button
+          className="scroll-button scroll-right"
+          onClick={() => scrollNext()}
+          disabled={currentPage === pagesToScroll}
+        >
+          <FontAwesomeIcon icon={faChevronRight} className="chevron-right" />
+        </button>
       </div>
-      <button
-        className="scroll-button scroll-right"
-        onClick={() => scrollNext()}
-        disabled={currentPage === pagesToScroll}
-      >
-        <FontAwesomeIcon icon={faChevronRight} className="chevron-right" />
-      </button>
     </div>
   );
 };
