@@ -6,12 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./buttons.scss";
 
-const VideoControlsButton = ({
-  status,
-  handleMuteToggle,
-  handleReplay,
-  muted,
-}) => {
+const VideoControlsButton = ({ handleMuteToggle, handleReplay, muted }) => {
   return (
     <>
       {muted ? (

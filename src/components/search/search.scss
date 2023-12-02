@@ -1,0 +1,45 @@
+.search-button {
+  background: transparent;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &__icon {
+    font-size: 1.55em;
+  }
+}
+
+.search-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px white solid;
+  padding: 0.35em;
+
+  &__input {
+    background: transparent;
+    border: none;
+    color: white;
+
+    &:focus-visible {
+      border: none;
+      outline: none;
+    }
+  }
+
+  &__button {
+    background: transparent;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &--icon {
+      font-size: 1.55em;
+      margin-right: 4px;
+    }
+  }
+}

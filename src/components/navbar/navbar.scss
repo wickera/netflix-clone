@@ -7,23 +7,30 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 4em;
   background: #000000;
-  background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0) 50%,
-    rgba(0, 0, 0, 0.5) 100%
-  );
   color: white;
-}
 
-.links {
-  list-style-type: none;
-  display: flex;
-  flex-direction: row;
-  padding: 0 4em;
-}
+  &__section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1em 3em;
 
-.links li {
-  padding: 5px;
+    &--link {
+      color: white;
+      text-decoration: none;
+      padding: 0 1em;
+
+      &:hover {
+        cursor: pointer;
+        color: lightgray;
+      }
+    }
+
+    &--icon {
+      width: 7em;
+      padding-right: 2em;
+      color: red;
+    }
+  }
 }

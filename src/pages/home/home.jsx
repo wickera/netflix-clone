@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import HomeVideoPlayer from "../../components/video/homeVideo";
+import { useDispatch, useSelector } from "react-redux";
+import HeaderVideoPlayer from "../../components/video/headerVideoPlayer";
 import Row from "../../components/row/row";
 import PlayButton from "../../components/buttons/playButton";
 import MoreInfoButton from "../../components/buttons/moreInfoButton";
 import VideoControlsButton from "../../components/buttons/videoContolsButton";
-import { useDispatch, useSelector } from "react-redux";
 import {
   fetchPopularMovies,
   selectPopularMovies,
@@ -37,9 +37,19 @@ function Home() {
   const [muted, setMuted] = useState(false);
   const playerRef = useRef(null);
 
+  const shuffled = (arr) => {
+    const shuffled = [...arr];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
   const handleMuteToggle = () => {
     const player = playerRef.current.internalPlayer;
     if (player) {
+      console.log(player);
       muted ? player.unMute() : player.mute();
       setMuted((muted) => !muted);
     }
@@ -76,7 +86,7 @@ function Home() {
   return (
     <>
       <div className="home">
-        <HomeVideoPlayer
+        <HeaderVideoPlayer
           movieId={popularMovies[0]?.id}
           playerRef={playerRef}
           onReady={_onReady}
@@ -111,13 +121,13 @@ function Home() {
         </div>
       </div>
       <div className="rows-start">
-        <Row title="Popular Movies" items={popularMovies} />
-        <Row title="Now Playing Movies" items={nowPlayingMovies} />
-        <Row title="Upcoming Movies" items={upcomingMovies} />
-        <Row title="Top Rated Movies" items={topRatedMovies} />
-        <Row title="Trending Movies" items={trendingMovies} />
-        <Row title="Popular TV Shows" items={popularShows} />
-        <Row title="Top Rated TV Shows" items={topRatedShows} />
+        <Row title="Popular Movies" items={shuffled(popularMovies)} />
+        <Row title="Now Playing Movies" items={shuffled(nowPlayingMovies)} />
+        <Row title="Upcoming Movies" items={shuffled(upcomingMovies)} />
+        <Row title="Top Rated Movies" items={shuffled(topRatedMovies)} />
+        <Row title="Trending Movies" items={shuffled(trendingMovies)} />
+        <Row title="Popular TV Shows" items={shuffled(popularShows)} />
+        <Row title="Top Rated TV Shows" items={shuffled(topRatedShows)} />
       </div>
     </>
   );

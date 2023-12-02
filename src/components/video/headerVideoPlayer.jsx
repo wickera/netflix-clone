@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import YouTube from "react-youtube";
 import apiKey from "../../api/youtube";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +8,7 @@ import {
 } from "../../redux/slices/moviesSlice";
 import "./video.scss";
 
-const HomeVideoPlayer = ({ movieId, playerRef, onReady }) => {
+const HeaderVideoPlayer = ({ movieId, playerRef, onReady }) => {
   const dispatch = useDispatch();
   const videos = useSelector(selectMovieVideosById);
   const [height, setHeight] = useState(window.innerHeight * 0.85);
@@ -48,7 +48,7 @@ const HomeVideoPlayer = ({ movieId, playerRef, onReady }) => {
 
   return (
     <YouTube
-      videoId={videos[0]?.key}
+      videoId={videos[0].key}
       opts={options}
       className="home-video"
       iframeClassName="home-video-iframe"
@@ -58,4 +58,4 @@ const HomeVideoPlayer = ({ movieId, playerRef, onReady }) => {
   );
 };
 
-export default HomeVideoPlayer;
+export default HeaderVideoPlayer;
