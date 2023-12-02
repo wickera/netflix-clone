@@ -48,7 +48,7 @@ const HeaderVideoPlayer = ({ movieId, playerRef, onReady }) => {
 
   return (
     <YouTube
-      videoId={videos[0].key}
+      videoId={videos[0]?.key}
       opts={options}
       className="home-video"
       iframeClassName="home-video-iframe"
