@@ -7,7 +7,7 @@
   }
 
   &__icon {
-    font-size: 1.55em;
+    font-size: 1.5em;
   }
 }
 
@@ -16,12 +16,13 @@
   justify-content: flex-start;
   align-items: center;
   border: 1px white solid;
-  padding: 0.35em;
+  padding: 0.5em;
 
   &__input {
     background: transparent;
     border: none;
     color: white;
+    font-size: 0.9em;
 
     &:focus-visible {
       border: none;
@@ -38,8 +39,13 @@
     }
 
     &--icon {
-      font-size: 1.55em;
+      font-size: 1.5em;
       margin-right: 4px;
     }
   }
+}
+
+.screen-reader-only {
+  visibility: hidden;
+  display: none;
 }

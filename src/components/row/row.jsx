@@ -5,19 +5,23 @@ import {
   faChevronRight,
   faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import "./row.css";
+import "./row.scss";
 
 const Row = ({ title, items }) => {
   const scrollContainerRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [imageWidth, setImageWidth] = useState(window.innerWidth / 6);
+  const [pageWidth, setPageWidth] = useState(windowWidth * 0.94);
+  const [buttonWidth, setButtonWidth] = useState(windowWidth * 0.03);
+  const [imageWidth, setImageWidth] = useState(pageWidth / 6);
   const itemsPerPage = 6;
 
   const updateWindowWidth = () => {
     const newWindowWidth = window.innerWidth;
     setWindowWidth(newWindowWidth);
-    setImageWidth(newWindowWidth / 6);
+    setButtonWidth(newWindowWidth * 0.03);
+    setPageWidth(newWindowWidth * 0.94);
+    setImageWidth(pageWidth / 6);
   };
 
   useEffect(() => {
@@ -32,7 +36,7 @@ const Row = ({ title, items }) => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [windowWidth]);
+  }, []);
 
   const handleScroll = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -42,7 +46,7 @@ const Row = ({ title, items }) => {
     const prevPage = currentPage - 1;
     if (prevPage >= 1) {
       handleScroll(prevPage);
-      scrollContainerRef.current.scrollLeft -= windowWidth - imageWidth / 3.5;
+      scrollContainerRef.current.scrollLeft -= pageWidth;
     }
   };
 
@@ -50,7 +54,7 @@ const Row = ({ title, items }) => {
     const nextPage = currentPage + 1;
     if (nextPage <= pagesToScroll.length) {
       handleScroll(nextPage);
-      scrollContainerRef.current.scrollLeft += windowWidth - imageWidth / 3.5;
+      scrollContainerRef.current.scrollLeft += pageWidth;
     }
   };
 
@@ -69,25 +73,37 @@ const Row = ({ title, items }) => {
 
   return (
     <div className="row">
-      <h4>{title}</h4>
-      <div className="row-container">
+      <h4 className="row__title">{title}</h4>
+      <div className="row__container">
         <button
-          className="scroll-button scroll-left"
+          className="row__container--scroll-button row__container--scroll-button--scroll-left"
           onClick={() => scrollPrevious()}
           disabled={currentPage === 1}
+          style={{ width: buttonWidth }}
         >
           <FontAwesomeIcon icon={faChevronLeft} className="chevron-left" />
         </button>
-        <div className="scroll-container" ref={scrollContainerRef}>
+        <div
+          className="row__container--scroll-container"
+          ref={scrollContainerRef}
+        >
           {items &&
             pagesToScroll.map((page, index) => {
               return (
-                <div key={index} className="page">
+                <div
+                  key={index}
+                  className="row__container--scroll-container--page"
+                  style={{ width: pageWidth }}
+                >
                   {page.map((show) => {
                     return (
                       <Item
                         key={show.id}
-                        image={show.backdrop_path}
+                        image={
+                          show.backdrop_path
+                            ? show.backdrop_path
+                            : show.poster_path
+                        }
                         width={imageWidth}
                         showName={show.name}
                         showTitle={show.title}
@@ -99,9 +115,10 @@ const Row = ({ title, items }) => {
             })}
         </div>
         <button
-          className="scroll-button scroll-right"
+          className="row__container--scroll-button row__container--scroll-button--scroll-right"
           onClick={() => scrollNext()}
           disabled={currentPage === pagesToScroll}
+          style={{ width: buttonWidth }}
         >
           <FontAwesomeIcon icon={faChevronRight} className="chevron-right" />
         </button>

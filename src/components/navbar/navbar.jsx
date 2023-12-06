@@ -3,11 +3,17 @@ import netflix from "../../assets/images/netflix-logo.png";
 import Search from "../search/search";
 import "./navbar.scss";
 
-const Navbar = () => {
+export default function Navbar() {
   return (
-    <div className="navbar">
+    <nav className="navbar">
       <div className="navbar__section">
-        <img src={netflix} className="navbar__section--icon" />
+        <Link to="/" className="navbar__section--link">
+          <img
+            src={netflix}
+            className="navbar__section--icon"
+            alt="Netflix Logo"
+          />
+        </Link>
         <Link to="/" className="navbar__section--link">
           Home
         </Link>
@@ -22,12 +28,8 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar__section">
-        {/* <Link to="/search-results" className="navbar__section--link"> */}
         <Search />
-        {/* </Link> */}
       </div>
-    </div>
+    </nav>
   );
-};
-
-export default Navbar;
+}

@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import "./item.scss";
 
 const getImageUrl = (path) => `https://image.tmdb.org/t/p/w500${path}`;
 

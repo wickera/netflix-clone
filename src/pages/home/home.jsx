@@ -91,8 +91,8 @@ function Home() {
           playerRef={playerRef}
           onReady={_onReady}
         />
-        <div className="home-preview">
-          <div className="home-preview__info">
+        <div className="home__header-video">
+          <div className="home__header-video--details">
             {popularMovies[0] ? (
               <>
                 <h4>{popularMovies[0].title}</h4>
@@ -104,14 +104,14 @@ function Home() {
             <PlayButton />
             <MoreInfoButton />
           </div>
-          <div className="home-preview-rating">
+          <div className="home__header-video--controls">
             <VideoControlsButton
               handleReplay={handleReplay}
               handleMuteToggle={handleMuteToggle}
               muted={muted}
             />
             {popularMovies[0] ? (
-              <p className="home-preview-rating__score">
+              <p className="home__header-video--controls--rating">
                 {popularMovies[0].vote_average}
               </p>
             ) : (
@@ -120,7 +120,7 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className="rows-start">
+      <div className="home__rows">
         <Row title="Popular Movies" items={shuffled(popularMovies)} />
         <Row title="Now Playing Movies" items={shuffled(nowPlayingMovies)} />
         <Row title="Upcoming Movies" items={shuffled(upcomingMovies)} />

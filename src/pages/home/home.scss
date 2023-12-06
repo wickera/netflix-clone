@@ -3,61 +3,61 @@
   width: 100%;
   height: 85vh;
   z-index: 100;
-}
 
-.home-preview {
-  z-index: 100;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 48px;
-  background: rgb(0, 0, 0);
-  background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 1) 5%,
-    rgba(0, 0, 0, 0.99) 15%,
-    rgba(0, 0, 0, 0.75) 25%,
-    rgba(0, 0, 0, 0) 50%
-  );
+  &__header-video {
+    z-index: 100;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 48px;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 1) 5%,
+      rgba(0, 0, 0, 0.99) 15%,
+      rgba(0, 0, 0, 0.75) 25%,
+      rgba(0, 0, 0, 0) 50%
+    );
 
-  &__info {
-    width: 30%;
-    margin-left: 1em;
-    color: white;
-    text-shadow: 2px 2px 7px rgba(0, 0, 0, 0.6);
+    &--details {
+      width: 30%;
+      margin-left: 1em;
+      color: white;
+      text-shadow: 2px 2px 7px rgba(0, 0, 0, 0.6);
 
-    & p {
-      font-size: 18px;
-      font-weight: 500;
+      & p {
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      & h4 {
+        font-size: 64px;
+        margin: 0;
+      }
     }
 
-    & h4 {
-      font-size: 64px;
-      margin: 0;
+    &--controls {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 7em;
+
+      &--rating {
+        padding: 0.25em 3em 0.25em 1em;
+        background: rgba(0, 0, 0, 0.4);
+        border-left: 2px solid white;
+        color: white;
+        font-size: 20px;
+      }
     }
   }
-}
 
-.home-preview-rating {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 7em;
-
-  &__score {
-    padding: 0.25em 3em 0.25em 1em;
-    background: rgba(0, 0, 0, 0.4);
-    border-left: 2px solid white;
-    color: white;
-    font-size: 20px;
+  &__rows {
+    position: relative;
+    margin-top: -18em;
+    z-index: 1000;
   }
-}
-
-.rows-start {
-  position: relative;
-  margin-top: -18em;
-  z-index: 1000;
 }
